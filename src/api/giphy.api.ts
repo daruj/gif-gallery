@@ -18,14 +18,14 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
     endpoints: (builder) => ({
         listGift: builder.query<ApiResponse<Gif>, { search: string; page: number }>({
-            query: ({ search = '', page = 1 }) => ({
+            query: ({ search = '', page = 0 }) => ({
                 url: `gifs/search`,
                 method: 'GET',
                 params: {
                     api_key: envs.giphy.apiKey,
                     q: search,
                     limit: LIMIT,
-                    offset: page === 1 ? 0 : LIMIT * page,
+                    offset: LIMIT * page,
                 },
             }),
         }),
