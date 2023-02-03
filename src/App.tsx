@@ -1,7 +1,13 @@
-import React from 'react'
+import { api } from './api/giphy.api'
+import { ApiProvider } from '@reduxjs/toolkit/query/react'
+import GalleryPage from './pages/GalleryPage/GalleryPage'
 
-const App = () => {
-    return <h1>Hey There</h1>
+function App() {
+    return (
+        <ApiProvider api={api}>
+            <GalleryPage />
+        </ApiProvider>
+    )
 }
 
 export default App
