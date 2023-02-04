@@ -9,17 +9,7 @@ const GalleryPage = () => {
     const [search, setSearch] = useState('')
     const [canSearch, setCanSearch] = useState(false)
 
-    const {
-        isLoading,
-        isError,
-        error,
-        data,
-        fetchNextPage,
-        isFetching,
-        isFetchingNextPage,
-        isSuccess,
-        hasPreviousPage,
-    } = useInfiniteQuery({
+    const { isLoading, data, fetchNextPage, isFetching, isSuccess } = useInfiniteQuery({
         queryKey: ['search-gifs', search],
         queryFn: async ({ queryKey, pageParam = 0 }: QueryFunctionContext<[string, string], number>) => {
             setCanSearch(false)
