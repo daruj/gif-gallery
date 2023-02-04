@@ -42,7 +42,6 @@ const GalleryPage = () => {
 
     const onPaginate = useCallback(() => {
         if (isSuccess) {
-            console.log('ACAA')
             fetchNextPage()
         }
     }, [fetchNextPage, isSuccess])
