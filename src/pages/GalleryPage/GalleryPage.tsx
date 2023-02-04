@@ -1,43 +1,62 @@
-import { useCallback, useState } from 'react'
-import { useLazyListGiftQuery } from '../../api/giphy.api'
+import { useCallback, useState, useMemo } from 'react'
 import GridContainer from '../../components/GridContainer/GridContainer'
 import SearchInput from '../../components/SearchInput/SearchInput'
 import styles from './GalleryPage.module.scss'
+import { QueryFunctionContext, useInfiniteQuery } from 'react-query'
+import { fetchGifs, LIMIT } from '../../api/giphy.api'
 
 const GalleryPage = () => {
     const [search, setSearch] = useState('')
-    const [page, setPage] = useState(0)
-    const [trigger, result] = useLazyListGiftQuery()
+    const [canSearch, setCanSearch] = useState(false)
 
-    const onSearch = useCallback(
-        (search: string) => {
-            setSearch(search)
-            trigger({ search, page })
+    const {
+        isLoading,
+        isError,
+        error,
+        data,
+        fetchNextPage,
+        isFetching,
+        isFetchingNextPage,
+        isSuccess,
+        hasPreviousPage,
+    } = useInfiniteQuery({
+        queryKey: ['search-gifs', search],
+        queryFn: async ({ queryKey, pageParam = 0 }: QueryFunctionContext<[string, string], number>) => {
+            setCanSearch(false)
+            const search = queryKey[1]
+            return await fetchGifs(search, pageParam)
         },
-        [page, trigger],
-    )
+        enabled: canSearch,
+        getNextPageParam: (lastPage) => {
+            const { offset, total_count } = lastPage.pagination
+            return total_count > offset ? lastPage.pagination.offset / LIMIT + 1 : undefined
+        },
+    })
 
-    const onPaginate = () => {
-        // console.log('ACAA', result.isSuccess, result.data?.pagination.total_count, result.data?.pagination.offset)
-        // if (
-        //     !result.isLoading &&
-        //     result.isSuccess &&
-        //     result.data?.pagination.total_count > result.data?.pagination.offset
-        // ) {
-        setPage(page + 1)
+    const onSearch = useCallback((searchTerm: string) => {
+        if (searchTerm.length >= 3) {
+            setSearch(searchTerm)
+            setCanSearch(true)
+        }
+    }, [])
 
-        // trigger({ search, page: page + 1 })
-        // }
-    }
+    const onPaginate = useCallback(() => {
+        if (isSuccess) {
+            console.log('ACAA')
+            fetchNextPage()
+        }
+    }, [fetchNextPage, isSuccess])
 
-    console.log(page)
+    const images = useMemo(() => (isSuccess ? data.pages.flatMap((page) => page.data) : []), [data?.pages, isSuccess])
 
     return (
         <div className={styles['gallery-page']}>
             <SearchInput onSearch={onSearch} />
-            {result.isSuccess && result.data.data.length && (
-                <GridContainer images={result.data?.data || []} handlePaginate={onPaginate} />
-            )}
+            <div className={styles['content']}>
+                {isSuccess && (
+                    <GridContainer images={images} isLoading={isLoading || isFetching} handlePaginate={onPaginate} />
+                )}
+            </div>
         </div>
     )
 }

@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import envs from '../environments'
 import { Gif } from '../types/gifs'
+import { getUrlWithParams } from '../utils/http'
 
 interface ApiResponse<T> {
     pagination: {
@@ -12,24 +12,21 @@ interface ApiResponse<T> {
 }
 
 const BASE_URL = 'https://api.giphy.com/v1/'
-const LIMIT = 20
+export const LIMIT = 20
 
-export const api = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
-    endpoints: (builder) => ({
-        listGift: builder.query<ApiResponse<Gif>, { search: string; page: number }>({
-            query: ({ search = '', page = 0 }) => ({
-                url: `gifs/search`,
-                method: 'GET',
-                params: {
-                    api_key: envs.giphy.apiKey,
-                    q: search,
-                    limit: LIMIT,
-                    offset: LIMIT * page,
-                },
-            }),
-        }),
-    }),
-})
+export const fetchGifs = async (searchTerm: string, page: number): Promise<ApiResponse<Gif>> => {
+    const url = getUrlWithParams(`${BASE_URL}gifs/search`, {
+        api_key: envs.giphy.apiKey,
+        q: searchTerm,
+        limit: LIMIT,
+        offset: LIMIT * page,
+    })
 
-export const { useLazyListGiftQuery } = api
+    const response = await fetch(url)
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok')
+    }
+
+    return response.json()
+}

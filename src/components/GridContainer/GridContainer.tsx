@@ -1,34 +1,21 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Gif } from '../../types/gifs'
 import GridItem from '../GridItem/GridItem'
 import styles from './GridContainer.module.scss'
+import { useInView } from 'react-intersection-observer'
 
-const GridContainer: React.FC<{ images: Gif[]; handlePaginate: () => void }> = ({ images, handlePaginate }) => {
-    const [lastElement, setLastElement] = useState<HTMLPictureElement | null>(null)
-
-    const observer = useRef(
-        new IntersectionObserver((entries) => {
-            const first = entries[0]
-            if (first.isIntersecting) {
-                handlePaginate()
-            }
-        }),
-    )
+const GridContainer: React.FC<{ images: Gif[]; handlePaginate: () => void; isLoading: boolean }> = ({
+    images,
+    handlePaginate,
+    isLoading,
+}) => {
+    const { ref, inView } = useInView()
 
     useEffect(() => {
-        const currentElement = lastElement
-        const currentObserver = observer.current
-
-        if (currentElement) {
-            currentObserver.observe(currentElement)
+        if (inView) {
+            handlePaginate()
         }
-
-        return () => {
-            if (currentElement) {
-                currentObserver.unobserve(currentElement)
-            }
-        }
-    }, [lastElement])
+    }, [inView, handlePaginate])
 
     return (
         <div className={styles['grid-container']}>
@@ -36,19 +23,26 @@ const GridContainer: React.FC<{ images: Gif[]; handlePaginate: () => void }> = (
                 if (index === images.length - 1) {
                     return (
                         <GridItem
-                            id={image.id}
                             title={image.title}
                             key={image.id}
                             url={image.images.original.webp}
-                            ref={setLastElement}
+                            ref={ref}
+                            isLoading={isLoading}
                         />
                     )
                 } else {
                     return (
-                        <GridItem id={image.id} title={image.title} key={image.id} url={image.images.original.webp} />
+                        <GridItem
+                            title={image.title}
+                            key={image.id}
+                            url={image.images.original.webp}
+                            isLoading={isLoading}
+                        />
                     )
                 }
             })}
+            {isLoading &&
+                Array.from({ length: 20 }).map((_, index) => <GridItem title='' key={index} url='' isLoading />)}
         </div>
     )
 }
