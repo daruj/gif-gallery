@@ -1,6 +1,6 @@
 const envs = {
     giphy: {
-        apiKey: 'fkXqHclIMqmxmGu6gkXtoRBN4tmxjogB',
+        apiKey: process.env.REACT_APP_GIPHY_API_KEY,
     },
 }
 
