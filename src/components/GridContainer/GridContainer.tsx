@@ -3,7 +3,7 @@ import { Gif } from '../../types/gifs'
 import GridItem from '../GridItem/GridItem'
 import styles from './GridContainer.module.scss'
 import { useInView } from 'react-intersection-observer'
-import debounce from '../../utils/debounce'
+import debounce from '../../utils/debounce.util'
 import { LIMIT } from '../../api/giphy.api'
 
 const GridContainer: React.FC<{ images: Gif[]; handlePaginate: () => void; isLoading: boolean }> = ({

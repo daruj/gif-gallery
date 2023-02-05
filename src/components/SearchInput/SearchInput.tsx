@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import debounce from '../../utils/debounce'
+import debounce from '../../utils/debounce.util'
 import styles from './SearchInput.module.scss'
 
 const SearchInput: React.FC<{ onSearch: (query: string) => void }> = ({ onSearch }) => {

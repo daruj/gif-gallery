@@ -17,8 +17,7 @@ const useGallerySearch = ({ searchAfterChars, initialSearchQuery }: UseGallerySe
         queryFn: async ({ queryKey, pageParam = 0 }: QueryFunctionContext<[string, string], number>) => {
             setCanSearch(false)
             const search = queryKey[1]
-            const results = await fetchGifs(search, pageParam)
-            return results
+            return await fetchGifs(search, pageParam)
         },
         enabled: canSearch,
         getNextPageParam: (lastPage) => {

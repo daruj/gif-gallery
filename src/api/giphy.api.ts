@@ -1,8 +1,8 @@
 import envs from '../environments'
 import { Gif } from '../types/gifs'
-import { getUrlWithParams } from '../utils/http'
+import { getUrlWithParams } from '../utils/http.util'
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
     pagination: {
         total_count: number
         count: number
@@ -11,11 +11,11 @@ interface ApiResponse<T> {
     data: T[]
 }
 
-const BASE_URL = 'https://api.giphy.com/v1/'
+export const GIPHY_BASE_URL = 'https://api.giphy.com/v1/'
 export const LIMIT = 20
 
 export const fetchGifs = async (searchTerm: string, page: number): Promise<ApiResponse<Gif>> => {
-    const url = getUrlWithParams(`${BASE_URL}gifs/search`, {
+    const url = getUrlWithParams(`${GIPHY_BASE_URL}gifs/search`, {
         api_key: envs.giphy.apiKey,
         q: searchTerm,
         limit: LIMIT,
@@ -25,8 +25,8 @@ export const fetchGifs = async (searchTerm: string, page: number): Promise<ApiRe
     const response = await fetch(url)
 
     if (!response.ok) {
-        throw new Error('Network response was not ok')
+        throw new Error(response.statusText)
     }
 
-    return response.json()
+    return await response.json()
 }
