@@ -26,8 +26,8 @@ const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
         },
     })
     const onSearch = useCallback((searchTerm: string) => {
+        setSearch(searchTerm)
         if (searchTerm.length >= initValues.current.searchAfterChars) {
-            setSearch(searchTerm)
             setCanSearch(true)
         }
     }, [])
@@ -38,7 +38,13 @@ const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
         }
     }, [fetchNextPage, search.length])
 
-    const images = useMemo(() => (isSuccess ? data.pages.flatMap((page) => page.data) : []), [data?.pages, isSuccess])
+    const images = useMemo(
+        () =>
+            isSuccess && search.length >= initValues.current.searchAfterChars
+                ? data.pages.flatMap((page) => page.data)
+                : [],
+        [data?.pages, isSuccess, search.length],
+    )
 
     return { onSearch, onPaginate, images, isLoading, isFetching, isSuccess, isFetched, isRefetching }
 }
