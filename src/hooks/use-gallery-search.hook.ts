@@ -11,12 +11,13 @@ const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
     const [canSearch, setCanSearch] = useState(false)
     const initValues = useRef({ searchAfterChars })
 
-    const { isLoading, data, fetchNextPage, isFetching, isSuccess } = useInfiniteQuery({
+    const { isLoading, data, fetchNextPage, isFetching, isSuccess, isFetched, isRefetching } = useInfiniteQuery({
         queryKey: ['search-gifs', search],
         queryFn: async ({ queryKey, pageParam = 0 }: QueryFunctionContext<[string, string], number>) => {
             setCanSearch(false)
             const search = queryKey[1]
-            return await fetchGifs(search, pageParam)
+            const results = await fetchGifs(search, pageParam)
+            return results
         },
         enabled: canSearch,
         getNextPageParam: (lastPage) => {
@@ -24,7 +25,6 @@ const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
             return total_count > offset ? lastPage.pagination.offset / LIMIT + 1 : undefined
         },
     })
-
     const onSearch = useCallback((searchTerm: string) => {
         if (searchTerm.length >= initValues.current.searchAfterChars) {
             setSearch(searchTerm)
@@ -33,14 +33,14 @@ const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
     }, [])
 
     const onPaginate = useCallback(() => {
-        if (isSuccess) {
+        if (search.length >= initValues.current.searchAfterChars) {
             fetchNextPage()
         }
-    }, [fetchNextPage, isSuccess])
+    }, [fetchNextPage, search.length])
 
     const images = useMemo(() => (isSuccess ? data.pages.flatMap((page) => page.data) : []), [data?.pages, isSuccess])
 
-    return { onSearch, onPaginate, images, isLoading, isFetching, isSuccess }
+    return { onSearch, onPaginate, images, isLoading, isFetching, isSuccess, isFetched, isRefetching }
 }
 
 export default useGallerySearch
