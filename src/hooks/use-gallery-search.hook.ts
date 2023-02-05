@@ -4,12 +4,13 @@ import { fetchGifs, LIMIT } from '../api/giphy.api'
 
 interface UseGallerySearch {
     searchAfterChars: number
+    initialSearchQuery?: string
 }
 
-const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
-    const [search, setSearch] = useState('')
-    const [canSearch, setCanSearch] = useState(false)
-    const initValues = useRef({ searchAfterChars })
+const useGallerySearch = ({ searchAfterChars, initialSearchQuery }: UseGallerySearch) => {
+    const [search, setSearch] = useState(initialSearchQuery || '')
+    const [canSearch, setCanSearch] = useState(!!initialSearchQuery)
+    const initValues = useRef({ searchAfterChars, initialSearchQuery })
 
     const { isLoading, data, fetchNextPage, isFetching, isSuccess, isFetched, isRefetching } = useInfiniteQuery({
         queryKey: ['search-gifs', search],
@@ -26,9 +27,11 @@ const useGallerySearch = ({ searchAfterChars }: UseGallerySearch) => {
         },
     })
     const onSearch = useCallback((searchTerm: string) => {
-        setSearch(searchTerm)
         if (searchTerm.length >= initValues.current.searchAfterChars) {
+            setSearch(searchTerm)
             setCanSearch(true)
+        } else {
+            setSearch(initValues.current.initialSearchQuery || searchTerm)
         }
     }, [])
 

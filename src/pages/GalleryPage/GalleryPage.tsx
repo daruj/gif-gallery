@@ -8,6 +8,9 @@ const START_SEARCHING_AFTER_CHARS = 3
 const GalleryPage = () => {
     const { onSearch, onPaginate, images, isRefetching } = useGallerySearch({
         searchAfterChars: START_SEARCHING_AFTER_CHARS,
+        // the initialSearchQuery will make the user always see something in the UI even if he clears the search.
+        // I believe showing random gifs makes a lot of sense here because it makes the user to stay in the page longer.
+        initialSearchQuery: 'random',
     })
 
     return (
