@@ -10,6 +10,24 @@
         padding: 0 20px 20px 20px;
     }
 
+    .error {
+        padding: 20px;
+        margin: 40px auto;
+        background-color: coral;
+        text-align: center;
+        width: 350px;
+        border-radius: 10px;
+
+        a {
+            color: #0e0e92;
+            transition: color 0.2s ease-in-out;
+
+            &:hover {
+                color: #3b3ba3;
+            }
+        }
+    }
+
     .content {
         padding-top: 92px;
         width: 100%;
