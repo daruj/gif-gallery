@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react'
-import { Gif } from '../../types/gifs'
-import GridItem from '../GridItem/GridItem'
+import { Gif } from '@src/types/gifs'
+import GridItem from '@src/components/GridItem/GridItem'
 import styles from './GridContainer.module.scss'
 import { useInView } from 'react-intersection-observer'
-import debounce from '../../utils/debounce.util'
-import { LIMIT } from '../../api/giphy.api'
+import debounce from '@src/utils/debounce.util'
+import { LIMIT } from '@src/api/giphy.api'
 
 const GridContainer: React.FC<{
   images: Gif[]

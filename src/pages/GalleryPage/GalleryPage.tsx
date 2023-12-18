@@ -1,7 +1,7 @@
-import GridContainer from '../../components/GridContainer/GridContainer'
-import SearchInput from '../../components/SearchInput/SearchInput'
+import GridContainer from '@src/components/GridContainer/GridContainer'
+import SearchInput from '@src/components/SearchInput/SearchInput'
 import styles from './GalleryPage.module.scss'
-import useGallerySearch from '../../hooks/use-gallery-search.hook'
+import useGallerySearch from '@src/hooks/use-gallery-search.hook'
 
 const START_SEARCHING_AFTER_CHARS = 3
 

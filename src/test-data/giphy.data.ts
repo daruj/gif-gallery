@@ -1,4 +1,4 @@
-import { Gif } from '../types/gifs'
+import { Gif } from '@src/types/gifs'
 
 export const image: Gif = {
   id: '1234',

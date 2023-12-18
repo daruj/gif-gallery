@@ -1,7 +1,7 @@
-import { Gif } from '../types/gifs'
+import { Gif } from '@src/types/gifs'
 import { fetchGifs, ApiResponse, GIPHY_BASE_URL, LIMIT } from './giphy.api'
-import envs from '../environments'
-import { image } from '../test-data/giphy.data'
+import envs from '@src/environments'
+import { image } from '@src/test-data/giphy.data'
 
 const currentPage = 0
 const search = 'Dogs'

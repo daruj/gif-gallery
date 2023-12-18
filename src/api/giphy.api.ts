@@ -1,6 +1,6 @@
-import envs from '../environments'
-import { Gif } from '../types/gifs'
-import { getUrlWithParams } from '../utils/http.util'
+import envs from '@src/environments'
+import { Gif } from '@src/types/gifs'
+import { getUrlWithParams } from '@src/utils/http.util'
 
 export interface ApiResponse<T> {
   pagination: {
