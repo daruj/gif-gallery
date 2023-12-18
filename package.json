@@ -39,6 +39,9 @@
     "*.{ts,tsx}": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
   },
+  "engines": {
+    "node": ">=18.13.0"
+  },
   "scripts": {
     "start": "env-cmd -f ./src/.env react-scripts start",
     "build": "env-cmd -f ./src/.env react-scripts build",
