@@ -20,7 +20,7 @@ const GalleryPage = () => {
       <div className={styles['content']}>
         {isError && (
           <p className={styles['error']}>
-            We've found an error, plz{' '}
+            {`We've found an error, plz `}
             <a
               href='#/'
               onClick={(evt) => {

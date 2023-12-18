@@ -49,7 +49,7 @@ test('fetchGifs: should throw an error if the response is not ok', async () => {
     error = e as Error
   }
   expect(error).toBeDefined()
-  expect(error!.message).toBe(errorStatusText)
+  expect(error?.message).toBe(errorStatusText)
   expect(mockFetchResponse).toHaveBeenCalledWith(
     `${GIPHY_BASE_URL}gifs/search?api_key=${envs.giphy.apiKey}&q=${search}&limit=${LIMIT}&offset=${offset}`
   )

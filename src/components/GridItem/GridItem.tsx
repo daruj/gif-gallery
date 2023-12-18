@@ -15,4 +15,6 @@ const GridItem = forwardRef(
   }
 )
 
+GridItem.displayName = 'GridItem'
+
 export default React.memo(GridItem)
