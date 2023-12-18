@@ -3,11 +3,11 @@
 import GalleryPage from './pages/GalleryPage/GalleryPage'
 
 function App() {
-    return (
-        // <ApiProvider api={api}>
-        <GalleryPage />
-        // </ApiProvider>
-    )
+  return (
+    // <ApiProvider api={api}>
+    <GalleryPage />
+    // </ApiProvider>
+  )
 }
 
 export default App
