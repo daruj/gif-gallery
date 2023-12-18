@@ -1,5 +1,6 @@
 import React, { forwardRef, Ref } from 'react'
 import styles from './GridItem.module.scss'
+import Image from '@src/components/Image/Image'
 
 interface GridItemPros {
   url: string
@@ -9,7 +10,7 @@ const GridItem = forwardRef(
   ({ url, title }: GridItemPros, ref: Ref<HTMLPictureElement>) => {
     return (
       <picture className={styles['grid-item']} ref={ref}>
-        <img src={url} alt={title} />
+        <Image src={url} alt={title} />
       </picture>
     )
   }
