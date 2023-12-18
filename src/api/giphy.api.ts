@@ -12,7 +12,7 @@ export interface ApiResponse<T> {
 }
 
 export const GIPHY_BASE_URL = 'https://api.giphy.com/v1/'
-export const LIMIT = 20
+export const LIMIT = 24
 
 export const fetchGifs = async (
   searchTerm: string,

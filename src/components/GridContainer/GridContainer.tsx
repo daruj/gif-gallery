@@ -27,10 +27,10 @@ const GridContainer: React.FC<{
     }
   }, [inView, isLoading, handlePaginate])
 
-  // Instead of start paginating when the last item is visible, I want to do it when we are at 25% of the amount of items visible in the page.
+  // Instead of start paginating when the last item is visible, I want to do it when we are at 20% of the amount of items visible in the page.
   // That will improve UX because the user will mostly not notice that we are paginating at all.
   const startPaginatingOnItem = useMemo(
-    () => images.length - Math.ceil(LIMIT * 0.25),
+    () => images.length - Math.ceil(LIMIT * 0.2),
     [images]
   )
 
