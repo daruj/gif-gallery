@@ -1,6 +1,7 @@
 import { useCallback, useState, useMemo, useRef } from 'react'
 import { QueryFunctionContext, useInfiniteQuery } from 'react-query'
 import { fetchGifs, LIMIT } from '@src/api/giphy.api'
+import { Gif } from '../types/gifs'
 
 interface UseGallerySearch {
   searchAfterChars: number
@@ -54,7 +55,7 @@ const useGallerySearch = ({ searchAfterChars, initialSearchQuery }: UseGallerySe
   }, [fetchNextPage, search.length])
 
   const images = useMemo(
-    () =>
+    (): Gif[] =>
       isSuccess && search.length >= initValues.current.searchAfterChars
         ? data.pages.flatMap((page) => page.data)
         : [],

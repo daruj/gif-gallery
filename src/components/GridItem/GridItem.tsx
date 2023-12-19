@@ -7,13 +7,11 @@ interface GridItemPros {
   title: string
 }
 const GridItem = forwardRef(
-  ({ url, title }: GridItemPros, ref: Ref<HTMLPictureElement>) => {
-    return (
-      <picture className={styles['grid-item']} ref={ref}>
-        <Image src={url} alt={title} width='100%' height='100%' />
-      </picture>
-    )
-  }
+  ({ url, title }: GridItemPros, ref: Ref<HTMLPictureElement>) => (
+    <picture className={styles['grid-item']} ref={ref}>
+      <Image src={url} alt={title} width='100%' height='100%' />
+    </picture>
+  )
 )
 
 GridItem.displayName = 'GridItem'

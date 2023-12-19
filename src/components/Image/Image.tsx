@@ -12,7 +12,7 @@ const Image: React.FC<ImageProps> = ({ alt, src, height, width }) => (
   <LazyLoadImage
     alt={alt}
     height={height}
-    src={src} // use normal <img> attributes as props
+    src={src}
     width={width}
     effect='blur'
     wrapperProps={{

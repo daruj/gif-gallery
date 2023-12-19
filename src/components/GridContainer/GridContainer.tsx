@@ -18,7 +18,6 @@ const GridContainer: React.FC<{
     () => images.length - Math.ceil(LIMIT * 0.25),
     [images]
   )
-
   return (
     <div className={styles['grid-container']}>
       {images.map((image, index) => {
