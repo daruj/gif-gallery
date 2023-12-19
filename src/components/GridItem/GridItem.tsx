@@ -10,6 +10,9 @@ const GridItem = forwardRef(
   ({ url, title }: GridItemPros, ref: Ref<HTMLPictureElement>) => (
     <picture className={styles['grid-item']} ref={ref}>
       <Image src={url} alt={title} width='100%' height='100%' />
+      <div className={styles['caption']}>
+        <span>{title}</span>
+      </div>
     </picture>
   )
 )
