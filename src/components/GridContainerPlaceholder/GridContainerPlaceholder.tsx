@@ -6,7 +6,7 @@ import GridItemPlaceholder from '@src/components/GridItemPlaceholder/GridItemPla
 const GridContainerPlaceholder: React.FC<{
   images: unknown[]
 }> = ({ images }) => (
-  <div className={styles['grid-container']}>
+  <div className={styles['grid-container-placeholder']}>
     {images.map((_, index) => {
       return <GridItemPlaceholder key={index} />
     })}
