@@ -1,4 +1,6 @@
-# Project Name
+# Coding Challenge
+
+Check out the [Coding Challenge Requirements](Challenge.md) to understand the prerequisites and requirements for the home assignment.
 
 ## Overview
 
