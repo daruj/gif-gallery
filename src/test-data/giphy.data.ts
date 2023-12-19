@@ -11,5 +11,17 @@ export const image: Gif = {
       height: '300',
       webp: 'http://fake.com/myimage.webp.gif',
     },
+    fixed_height: {
+      url: 'http://fake.com/myimage.gif',
+      width: '300',
+      height: '300',
+      webp: 'http://fake.com/myimage.webp.gif',
+    },
+    fixed_width: {
+      url: 'http://fake.com/myimage.gif',
+      width: '300',
+      height: '300',
+      webp: 'http://fake.com/myimage.webp.gif',
+    },
   },
 }

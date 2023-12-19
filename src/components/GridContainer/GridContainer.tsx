@@ -27,13 +27,17 @@ const GridContainer: React.FC<{
             <GridItem
               title={image.title}
               key={image.id}
-              url={image.images.original.webp}
+              url={image.images.fixed_height.webp}
               ref={observerTarget}
             />
           )
         }
         return (
-          <GridItem title={image.title} key={image.id} url={image.images.original.webp} />
+          <GridItem
+            title={image.title}
+            key={image.id}
+            url={image.images.fixed_height.webp}
+          />
         )
       })}
     </div>

@@ -1,13 +1,17 @@
+interface Image {
+  height: string
+  width: string
+  url: string
+  webp: string
+}
+
 export interface Gif {
   id: string
   url: string
   title: string
   images: {
-    original: {
-      height: string
-      width: string
-      url: string
-      webp: string
-    }
+    original: Image
+    fixed_height: Image
+    fixed_width: Image
   }
 }
