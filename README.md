@@ -1,46 +1,102 @@
-# Getting Started with Create React App
+# Project Name
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a React application built with Create React App and TypeScript. It incorporates various features and best practices to enhance code quality, maintainability, and user experience.
 
-In the project directory, you can run:
+## Getting Started
 
-### `npm start`
+To run the project locally, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   ```bash
+   git clone <repository-url>
+   ```
 
-### `npm test`
+2. Open folder in terminal
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   cd gif-gallery
+   ```
 
-### `npm run build`
+3. Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Start the application:
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you want to run the tests, please run `npm test`
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The project is organized into the following folders:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **api**: Contains API-related files and configurations.
+- **assets**: Includes static assets like images, fonts, etc.
+- **components**: Houses React components.
+- **hooks**: Custom React hooks.
+- **pages**: Top-level pages or views.
+- **test-data**: Data used for testing purposes.
+- **types**: TypeScript type definitions.
+- **utils**: Utility functions and helpers.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Code Quality
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Prettier**: Used for code formatting.
+- **ESLint**: Code linting to ensure consistent coding standards.
+- **Lint-Staged**: Runs ESLint on staged files before commit.
 
-## Learn More
+## Node Version
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The project specifies a Node version using `.nvmrc` and the `engines` property in `package.json`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Absolute Paths
+
+Absolute paths are implemented for easier imports throughout the project.
+
+## Styling
+
+- **SCSS**: Styling language for enhanced CSS.
+- **Scoped Sass Files**: Scoped styling for components.
+- **Global.scss**: Global styling with variables.
+
+## Features
+
+1. **Infinite Scroll**: Implemented using React-Query with an intersection observer hook and debounce for optimal performance.
+
+2. **Search GIF**: Utilizes a debounce hook to prevent unnecessary requests and enhance user experience.
+
+3. **Lazy Loading Images**: Implemented a library for lazy loading images with a pleasing animation and a placeholder for improved initial page loading, especially on slow connections.
+
+4. **Refetch Function**: Includes a refetch function to allow users to manually refresh content.
+
+5. **Error Handling**: A user-friendly link is provided on the page to prompt users to try refetching in case of an error.
+
+6. **Unit Testing**: Includes unit tests for API requests and utility functions.
+
+7. **Image Hover Animation**: Animated display of image title and label on hover for improved UX.
+
+8. **Responsive Design**: Ensures the application is fully responsive across various devices.
+
+## Code Quality
+
+- **Prettier**: Used for code formatting.
+- **ESLint**: Code linting to ensure consistent coding standards.
+- **Lint-Staged**: Runs ESLint and Prettier on staged files before commit.
+
+## Node Version
+
+The project specifies a Node version using `.nvmrc` and the `engines` property in `package.json`.
+
+## Suggestions for Testing
+
+- Test lazy loading with slow network connections for a realistic experience.
+- Explore image hover animation on different devices for optimal responsiveness.
+- Resize the page and see how it looks in different resolutions.
+- In case of an error, use the provided link to try refetching and ensure error handling is effective.

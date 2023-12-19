@@ -1,7 +1,7 @@
 import { useCallback, useState, useMemo, useRef } from 'react'
 import { QueryFunctionContext, useInfiniteQuery } from 'react-query'
 import { fetchGifs, LIMIT } from '@src/api/giphy.api'
-import { Gif } from '../types/gifs'
+import { Gif } from '@src/types/gifs'
 
 interface UseGallerySearch {
   searchAfterChars: number
